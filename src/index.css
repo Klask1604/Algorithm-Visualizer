@@ -36,3 +36,33 @@ h1 {
   display: flex;
   justify-content: space-evenly;
 }
+
+.bars {
+  border: 1px solid black;
+  height: 70%;
+  display: flex;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sorting {
+  background-color: #ff0000; /* Change the color to your preference */
+}
+
+.bar {
+  transition: height 0.3s ease-in-out;
+  width: 25px;
+  text-align: center;
+  margin: 0 2px;
+  background-color: #ff8a65;
+}
+
+.comparing {
+  background-color: #4caf50; /* Change the color to your preference */
+}
+
+.swapping {
+  background-color: #2196f3; /* Change the color to your preference */
+}
+.sorted {
+  background-color: lime; /* Change the color to your preference */
+}

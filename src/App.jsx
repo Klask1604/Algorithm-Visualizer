@@ -1,9 +1,23 @@
-import { useState } from "react";
-import { Bars } from "./components/bars";
+import { useState, useRef } from "react";
+import Bars from "./components/Bars";
 function App() {
+  const barsRef = useRef();
   const [activeButton, setActiveButton] = useState(null);
-  const handleButtonClick = (buttonName) => {
+
+  const handleButtonClick = async (buttonName) => {
     setActiveButton(buttonName);
+
+    if (buttonName === "Generate a new array") {
+      barsRef.current.generateBarsArray();
+    } else if (buttonName === "BubbleSort") {
+      barsRef.current.bubbleSort();
+    } else if (buttonName === "Insertion") {
+      barsRef.current.insertionSort();
+    } else if (buttonName === "Selection") {
+      barsRef.current.selectionSort();
+    } else if (buttonName === "Radix") {
+      barsRef.current.radixSort();
+    }
   };
   return (
     <>
@@ -16,7 +30,9 @@ function App() {
                 activeButton === "Generate a new array" ? "#FF7043" : "#E64A19",
               color: "white",
             }}
-            onClick={() => handleButtonClick("Generate a new array")}
+            onClick={() => {
+              handleButtonClick("Generate a new array");
+            }}
           >
             Generate a new array
           </button>
@@ -24,7 +40,7 @@ function App() {
           <button
             style={{
               backgroundColor:
-                activeButton === "BubbleSort" ? "#FF7043" : "#E64A19",
+                activeButton === "bubbleSort" ? "#FF7043" : "#E64A19",
               color: "white",
             }}
             onClick={() => handleButtonClick("BubbleSort")}
@@ -62,7 +78,7 @@ function App() {
           </button>
         </div>
       </div>
-      <Bars />
+      <Bars ref={barsRef} />
     </>
   );
 }
