@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Bars from "./components/Bars";
+import { Controller } from "./components/Controller";
 function App() {
   const barsRef = useRef();
   const [activeButton, setActiveButton] = useState(null);
@@ -10,15 +11,16 @@ function App() {
     if (buttonName === "Generate a new array") {
       barsRef.current.generateBarsArray();
     } else if (buttonName === "BubbleSort") {
-      barsRef.current.bubbleSort();
+      barsRef.current.sortBarsBubble();
     } else if (buttonName === "Insertion") {
-      barsRef.current.insertionSort();
+      barsRef.current.sortBarsInsertion();
     } else if (buttonName === "Selection") {
-      barsRef.current.selectionSort();
+      barsRef.current.sortBarsSelection();
     } else if (buttonName === "Radix") {
-      barsRef.current.radixSort();
+      await barsRef.current.sortBarsRadix();
     }
   };
+
   return (
     <>
       <div className="navbar">
@@ -40,7 +42,7 @@ function App() {
           <button
             style={{
               backgroundColor:
-                activeButton === "bubbleSort" ? "#FF7043" : "#E64A19",
+                activeButton === "BubbleSort" ? "#FF7043" : "#E64A19",
               color: "white",
             }}
             onClick={() => handleButtonClick("BubbleSort")}
@@ -78,7 +80,9 @@ function App() {
           </button>
         </div>
       </div>
+
       <Bars ref={barsRef} />
+      <Controller />
     </>
   );
 }
