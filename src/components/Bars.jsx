@@ -34,7 +34,6 @@ const Bars = forwardRef((props, ref) => {
     );
   };
 
-  // Bars.jsx
   const sortBarsBubble = async () => {
     setIsSorting(true);
     await bubbleSort(barsArray, setBarsArray);
@@ -98,6 +97,7 @@ const Bars = forwardRef((props, ref) => {
               </p>
             ))}
         </div>
+
         <button onClick={handleStopButtonClick}>
           <span>STOP</span>
           <i></i>

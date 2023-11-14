@@ -1,4 +1,3 @@
-// bubbleSort.jsx
 import swapBars from "./swap";
 
 let stopSorting = false;
