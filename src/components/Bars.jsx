@@ -3,16 +3,24 @@ import React, {
   useEffect,
   forwardRef,
   useImperativeHandle,
+  useRef,
 } from "react";
 
-import { bubbleSort, stopBubbleSort } from "./algorithms/bubbleSort";
+import bubbleSort from "./algorithms/bubbleSort";
 import insertionSort from "./algorithms/insertionSort";
 import radixSort from "./algorithms/radixSort";
 import selectionSort from "./algorithms/selectionSort";
 
-const Bars = forwardRef((props, ref) => {
+const Bars = forwardRef(({ onSortingStateChange }, ref) => {
   const [barsArray, setBarsArray] = useState([]);
   const [isSorting, setIsSorting] = useState(false);
+  const stopSortingRef = useRef(false);
+
+  useEffect(() => {
+    if (onSortingStateChange) {
+      onSortingStateChange(isSorting);
+    }
+  }, [isSorting, onSortingStateChange]);
 
   useEffect(() => {
     generateBarsArray();
@@ -22,7 +30,7 @@ const Bars = forwardRef((props, ref) => {
     const arrayLength = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
     const newArray = Array.from(
       { length: arrayLength },
-      () => Math.floor(Math.random() * (100 - 20 + 1)) + 20
+      () => Math.floor(Math.random() * (200 - 20 + 1)) + 20
     );
 
     setBarsArray(
@@ -36,50 +44,61 @@ const Bars = forwardRef((props, ref) => {
 
   const sortBarsBubble = async () => {
     setIsSorting(true);
-    await bubbleSort(barsArray, setBarsArray);
+    stopSortingRef.current = false;
+    await bubbleSort(barsArray, setBarsArray, stopSortingRef);
     setIsSorting(false);
   };
 
-  const sortBarsInsertion = () => {
+  const sortBarsInsertion = async () => {
     setIsSorting(true);
-    insertionSort(barsArray, setBarsArray);
+    stopSortingRef.current = false;
+    await insertionSort(barsArray, setBarsArray, stopSortingRef);
+    setIsSorting(false);
   };
-  const sortBarsSelection = () => {
+  const sortBarsSelection = async () => {
     setIsSorting(true);
-    selectionSort();
+    stopSortingRef.current = false;
+    await selectionSort(barsArray, setBarsArray, stopSortingRef);
+    setIsSorting(false);
   };
   const sortBarsRadix = async () => {
     setIsSorting(true);
-    await radixSort();
+    stopSortingRef.current = false;
+    await radixSort(barsArray, setBarsArray, stopSortingRef);
     setIsSorting(false);
   };
   useImperativeHandle(ref, () => ({
     generateBarsArray,
     sortBarsBubble: async () => {
       setIsSorting(true);
-      await bubbleSort(barsArray, setBarsArray);
+      stopSortingRef.current = false;
+      await bubbleSort(barsArray, setBarsArray, stopSortingRef);
       setIsSorting(false);
-      setStopSorting(false);
     },
-    sortBarsInsertion: () => {
+    sortBarsInsertion: async () => {
       setIsSorting(true);
-      insertionSort(barsArray, setBarsArray);
+      stopSortingRef.current = false;
+      await insertionSort(barsArray, setBarsArray, stopSortingRef);
+      setIsSorting(false);
     },
-    sortBarsSelection: () => {
+    sortBarsSelection: async () => {
       setIsSorting(true);
-      selectionSort(barsArray, setBarsArray);
+      stopSortingRef.current = false;
+      await selectionSort(barsArray, setBarsArray, stopSortingRef);
+      setIsSorting(false);
     },
     sortBarsRadix: async () => {
       setIsSorting(true);
-      await radixSort(barsArray, setBarsArray);
+      stopSortingRef.current = false;
+      await radixSort(barsArray, setBarsArray, stopSortingRef);
       setIsSorting(false);
     },
   }));
 
-  const handleStopButtonClick = () => {
-    stopBubbleSort();
+  const handleStopSort = () => {
+    stopSortingRef.current = true;
+    setIsSorting(false);
   };
-
   return (
     <>
       <div className="visualizer">
@@ -93,15 +112,16 @@ const Bars = forwardRef((props, ref) => {
                 } ${bar.isSorted ? "sorted" : ""}`}
                 style={{ height: `${bar.value * 2}px` }}
               >
-                {bar.value}
+                {/* {bar.value} */}
               </p>
             ))}
         </div>
-
-        <button onClick={handleStopButtonClick}>
-          <span>STOP</span>
-          <i></i>
-        </button>
+        <div className="stopbtn">
+          <button onClick={handleStopSort}>
+            <span>STOP</span>
+            <i></i>
+          </button>
+        </div>
       </div>
     </>
   );

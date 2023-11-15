@@ -1,17 +1,11 @@
-import swapBars from "./swap";
+import swapBars from "../utils/swap";
 
-let stopSorting = false;
-
-const bubbleSort = async (array, updateStateCallback) => {
-  stopSorting = false;
+const bubbleSort = async (array, updateStateCallback, StopSort) => {
   const newArray = [...array];
 
   for (let i = 0; i < newArray.length - 1; i++) {
+    if (StopSort.current) return;
     for (let j = 0; j < newArray.length - i - 1; j++) {
-      if (stopSorting) {
-        return;
-      }
-
       newArray[j].isSorted = false;
       newArray[j + 1].isSorted = false;
 
@@ -36,7 +30,10 @@ const bubbleSort = async (array, updateStateCallback) => {
 
     updateStateCallback([...newArray]);
   }
-
+  if (StopSort.current) {
+    setIsSorting(false);
+    return;
+  }
   updateStateCallback((prevArray) =>
     prevArray.map((bar, index) => ({
       ...bar,
@@ -46,8 +43,4 @@ const bubbleSort = async (array, updateStateCallback) => {
   );
 };
 
-const stopBubbleSort = () => {
-  stopSorting = true;
-};
-
-export { bubbleSort, stopBubbleSort };
+export default bubbleSort;

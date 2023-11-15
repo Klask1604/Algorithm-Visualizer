@@ -1,9 +1,14 @@
 import { useState, useRef } from "react";
 import Bars from "./components/Bars";
-import { Controller } from "./components/Controller";
 function App() {
   const barsRef = useRef();
   const [activeButton, setActiveButton] = useState(null);
+  const [ButtonSortDisable, setButtonSortDisable] = useState(false);
+
+  const handleSortingState = (sorting) => {
+    setButtonSortDisable(sorting);
+    console.log(sorting);
+  };
 
   const handleButtonClick = async (buttonName) => {
     setActiveButton(buttonName);
@@ -27,10 +32,13 @@ function App() {
         <h1>ALGVIS</h1>
         <div className="btns">
           <button
+            disabled={ButtonSortDisable}
             style={{
               backgroundColor:
                 activeButton === "Generate a new array" ? "#FF7043" : "#E64A19",
               color: "white",
+              opacity: ButtonSortDisable === true ? "30%" : "100%",
+              cursor: ButtonSortDisable === true ? "not-allowed" : "pointer",
             }}
             onClick={() => {
               handleButtonClick("Generate a new array");
@@ -40,39 +48,51 @@ function App() {
           </button>
 
           <button
+            disabled={ButtonSortDisable}
             style={{
               backgroundColor:
                 activeButton === "BubbleSort" ? "#FF7043" : "#E64A19",
               color: "white",
+              opacity: ButtonSortDisable === true ? "30%" : "100%",
+              cursor: ButtonSortDisable === true ? "not-allowed" : "pointer",
             }}
             onClick={() => handleButtonClick("BubbleSort")}
           >
             BubbleSort
           </button>
           <button
+            disabled={ButtonSortDisable}
             style={{
               backgroundColor:
                 activeButton === "Selection" ? "#FF7043" : "#E64A19",
               color: "white",
+              opacity: ButtonSortDisable === true ? "30%" : "100%",
+              cursor: ButtonSortDisable === true ? "not-allowed" : "pointer",
             }}
             onClick={() => handleButtonClick("Selection")}
           >
             Selection
           </button>
           <button
+            disabled={ButtonSortDisable}
             style={{
               backgroundColor:
                 activeButton === "Insertion" ? "#FF7043" : "#E64A19",
               color: "white",
+              opacity: ButtonSortDisable === true ? "30%" : "100%",
+              cursor: ButtonSortDisable === true ? "not-allowed" : "pointer",
             }}
             onClick={() => handleButtonClick("Insertion")}
           >
             Insertion
           </button>
           <button
+            disabled={ButtonSortDisable}
             style={{
               backgroundColor: activeButton === "Radix" ? "#FF7043" : "#E64A19",
               color: "white",
+              opacity: ButtonSortDisable === true ? "30%" : "100%",
+              cursor: ButtonSortDisable === true ? "not-allowed" : "pointer",
             }}
             onClick={() => handleButtonClick("Radix")}
           >
@@ -81,8 +101,7 @@ function App() {
         </div>
       </div>
 
-      <Bars ref={barsRef} />
-      <Controller />
+      <Bars ref={barsRef} onSortingStateChange={handleSortingState} />
     </>
   );
 }

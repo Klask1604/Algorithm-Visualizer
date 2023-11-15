@@ -1,66 +1,63 @@
-const radixSort = async (array, updateStateCallback) => {
-  const newArray = [...array];
-  const maxVal = Math.max(...newArray.map((bar) => bar.value));
+function getDigit(num, pos) {
+  return Math.floor(Math.abs(num) / Math.pow(10, pos)) % 10;
+}
 
-  let exp = 1;
-  let isSorting = true;
+function digitCount(num) {
+  if (num === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
 
-  const changes = [];
+function mostDigits(nums) {
+  let maxDigits = 0;
+  for (let i = 0; i < nums.length; i++) {
+    maxDigits = Math.max(maxDigits, digitCount(nums[i].value));
+  }
+  return maxDigits;
+}
 
-  while (isSorting) {
-    isSorting = false;
-    const buckets = Array.from({ length: 10 }, () => []);
+async function radixSort(array, setBarsArray, StopSort) {
+  let bars = [...array];
+  let maxDigitCount = mostDigits(bars);
 
-    for (let i = 0; i < newArray.length; i++) {
-      const digit = Math.floor(newArray[i].value / exp) % 10;
-      buckets[digit].push(newArray[i]);
+  for (let k = 0; k < maxDigitCount; k++) {
+    let digitBuckets = Array.from({ length: 10 }, () => []);
 
-      if (!isSorting && digit > 0) {
-        isSorting = true;
+    for (let i = 0; i < bars.length; i++) {
+      if (StopSort.current) {
+        setBarsArray([...bars]);
+        return;
       }
+
+      let digit = getDigit(bars[i].value, k);
+      digitBuckets[digit].push(bars[i]);
+
+      // Mark as 'comparing' during bucketing
+      bars[i].isComparing = true;
+      setBarsArray([...bars]);
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      bars[i].isComparing = false;
     }
 
-    exp *= 10;
+    bars = [].concat(...digitBuckets);
 
-    newArray.length = 0;
-    for (let i = 0; i < buckets.length; i++) {
-      newArray.push(...buckets[i]);
+    // Mark all as 'swapping' during reassignment from buckets
+    for (let i = 0; i < bars.length; i++) {
+      bars[i].isSwapping = true;
     }
-
-    // Accumulate changes for the current pass
-    changes.push(
-      newArray.map((bar, index) => ({
-        ...bar,
-        isComparing: true,
-      }))
-    );
-
-    // Add a delay for animation
-    await new Promise((resolve) => setTimeout(resolve, 50));
-
-    // Reset isComparing after the delay
-    changes.push(
-      newArray.map((bar) => ({
-        ...bar,
-        isComparing: false,
-      }))
-    );
+    setBarsArray([...bars]);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    for (let i = 0; i < bars.length; i++) {
+      bars[i].isSwapping = false;
+    }
   }
 
-  // Set isSorted after the sorting is complete
-  changes.push(
-    newArray.map((bar, index) => ({
-      ...bar,
-      isSorted: true,
-    }))
-  );
-
-  // Apply all accumulated changes
-  for (let i = 0; i < changes.length; i++) {
-    updateStateCallback(changes[i]);
-    // Add a delay for animation between passes
-    await new Promise((resolve) => setTimeout(resolve, 50));
+  // Mark all as sorted at the end
+  for (let i = 0; i < bars.length; i++) {
+    bars[i].isSorted = true;
   }
-};
+  setBarsArray([...bars]);
+
+  return bars;
+}
 
 export default radixSort;

@@ -1,36 +1,49 @@
-const insertionSort = async (array, updateStateCallback) => {
-  const newArray = [...array];
+async function insertionSort(array, setBarsArray, StopSort) {
+  let bars = [...array];
 
-  for (let i = 1; i < newArray.length; i++) {
-    let key = newArray[i].value;
+  for (let i = 1; i < bars.length; i++) {
+    if (StopSort.current) return;
+    let key = bars[i];
+    key.isComparing = true;
     let j = i - 1;
 
-    while (j >= 0 && newArray[j].value > key) {
-      newArray[j + 1].isSwapping = true;
-      newArray[j + 1].isSorted = false;
-      newArray[j + 1].value = newArray[j].value;
+    while (j >= 0 && bars[j].value > key.value) {
+      if (StopSort.current) {
+        key.isComparing = false;
+        setBarsArray([...bars]);
+        return;
+      }
 
-      updateStateCallback([...newArray]);
+      bars[j].isComparing = true;
+      bars[j].isSwapping = true;
+      bars[j].isSorted = false;
+      key.isSwapping = true;
+
+      setBarsArray([...bars]);
+
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      newArray[j + 1].isSwapping = false;
-      newArray[j + 1].isSorted = true;
+      bars[j + 1] = bars[j];
 
-      updateStateCallback([...newArray]);
+      bars[j].isSwapping = false;
+      bars[j].isComparing = false;
+      key.isSwapping = false;
 
-      j = j - 1;
+      j--;
     }
 
-    newArray[j + 1].value = key;
+    key.isComparing = false;
+    bars[j + 1] = key;
+
+    for (let k = 0; k <= i; k++) {
+      bars[k].isSorted = true;
+    }
+
+    setBarsArray([...bars]);
+    await new Promise((resolve) => setTimeout(resolve, 100));
   }
 
-  updateStateCallback((prevArray) =>
-    prevArray.map((bar) => ({
-      ...bar,
-      isSorted: true,
-      isSwapping: false,
-    }))
-  );
-};
+  return bars;
+}
 
 export default insertionSort;
