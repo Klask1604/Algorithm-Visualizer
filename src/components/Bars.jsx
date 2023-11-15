@@ -27,10 +27,10 @@ const Bars = forwardRef(({ onSortingStateChange }, ref) => {
   }, []);
 
   const generateBarsArray = () => {
-    const arrayLength = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
+    const arrayLength = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
     const newArray = Array.from(
       { length: arrayLength },
-      () => Math.floor(Math.random() * (200 - 20 + 1)) + 20
+      () => Math.floor(Math.random() * (99 - 5 + 1)) + 20
     );
 
     setBarsArray(
@@ -102,6 +102,7 @@ const Bars = forwardRef(({ onSortingStateChange }, ref) => {
   return (
     <>
       <div className="visualizer">
+        <div className="controller"></div>
         <div className="box-bars">
           {barsArray &&
             barsArray.map((bar, index) => (
@@ -112,7 +113,7 @@ const Bars = forwardRef(({ onSortingStateChange }, ref) => {
                 } ${bar.isSorted ? "sorted" : ""}`}
                 style={{ height: `${bar.value * 2}px` }}
               >
-                {/* {bar.value} */}
+                {bar.value}
               </p>
             ))}
         </div>

@@ -29,7 +29,9 @@ function App() {
   return (
     <>
       <div className="navbar">
-        <h1>ALGVIS</h1>
+        <div className="title">
+          <h1>ALGVIS</h1>
+        </div>
         <div className="btns">
           <button
             disabled={ButtonSortDisable}
@@ -44,7 +46,7 @@ function App() {
               handleButtonClick("Generate a new array");
             }}
           >
-            Generate a new array
+            New Array
           </button>
 
           <button
@@ -71,7 +73,7 @@ function App() {
             }}
             onClick={() => handleButtonClick("Selection")}
           >
-            Selection
+            SelectionSort
           </button>
           <button
             disabled={ButtonSortDisable}
@@ -84,7 +86,7 @@ function App() {
             }}
             onClick={() => handleButtonClick("Insertion")}
           >
-            Insertion
+            InsertionSort
           </button>
           <button
             disabled={ButtonSortDisable}
@@ -96,7 +98,7 @@ function App() {
             }}
             onClick={() => handleButtonClick("Radix")}
           >
-            Radix
+            RadixSort
           </button>
         </div>
       </div>
