@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Bars from "./components/Bars";
+import Navbar from "./components/Navbar";
 function App() {
   const barsRef = useRef();
   const [activeButton, setActiveButton] = useState(null);
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <>
-      <div className="navbar">
+      {/* <div className="navbar">
         <div className="title">
           <h1>ALGVIS</h1>
         </div>
@@ -100,8 +101,12 @@ function App() {
             RadixSort
           </button>
         </div>
-      </div>
-
+      </div> */}
+      <Navbar
+        activeButton={activeButton}
+        ButtonSortDisable={ButtonSortDisable}
+        handleButtonClick={handleButtonClick}
+      />
       <Bars ref={barsRef} onSortingStateChange={handleSortingState} />
     </>
   );

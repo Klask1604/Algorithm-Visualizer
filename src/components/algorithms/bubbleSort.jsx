@@ -6,6 +6,7 @@ const bubbleSort = async (array, updateStateCallback, StopSort, Speed) => {
   for (let i = 0; i < newArray.length - 1; i++) {
     if (StopSort.current) return;
     for (let j = 0; j < newArray.length - i - 1; j++) {
+      if (StopSort.current) return;
       newArray[j].isSorted = false;
       newArray[j + 1].isSorted = false;
 
