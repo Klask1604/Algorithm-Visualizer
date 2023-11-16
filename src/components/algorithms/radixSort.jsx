@@ -15,7 +15,7 @@ function mostDigits(nums) {
   return maxDigits;
 }
 
-async function radixSort(array, setBarsArray, StopSort) {
+async function radixSort(array, setBarsArray, StopSort, Speed) {
   let bars = [...array];
   let maxDigitCount = mostDigits(bars);
 
@@ -34,7 +34,7 @@ async function radixSort(array, setBarsArray, StopSort) {
       // Mark as 'comparing' during bucketing
       bars[i].isComparing = true;
       setBarsArray([...bars]);
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, Speed));
       bars[i].isComparing = false;
     }
 
@@ -45,7 +45,7 @@ async function radixSort(array, setBarsArray, StopSort) {
       bars[i].isSwapping = true;
     }
     setBarsArray([...bars]);
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, Speed));
     for (let i = 0; i < bars.length; i++) {
       bars[i].isSwapping = false;
     }

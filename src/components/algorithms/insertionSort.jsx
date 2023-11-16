@@ -1,4 +1,4 @@
-async function insertionSort(array, setBarsArray, StopSort) {
+async function insertionSort(array, setBarsArray, StopSort, Speed) {
   let bars = [...array];
 
   for (let i = 1; i < bars.length; i++) {
@@ -21,7 +21,7 @@ async function insertionSort(array, setBarsArray, StopSort) {
 
       setBarsArray([...bars]);
 
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, Speed));
 
       bars[j + 1] = bars[j];
 
@@ -40,7 +40,7 @@ async function insertionSort(array, setBarsArray, StopSort) {
     }
 
     setBarsArray([...bars]);
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, Speed));
   }
 
   return bars;

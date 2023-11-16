@@ -1,4 +1,4 @@
-async function selectionSort(array, setBarsArray, StopSort) {
+async function selectionSort(array, setBarsArray, StopSort, Speed) {
   let bars = [...array];
 
   for (let i = 0; i < bars.length - 1; i++) {
@@ -9,7 +9,7 @@ async function selectionSort(array, setBarsArray, StopSort) {
       bars[j].isComparing = true;
       setBarsArray([...bars]);
 
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, Speed));
 
       if (bars[j].value < bars[minIndex].value) {
         if (minIndex !== i) {
@@ -37,7 +37,7 @@ async function selectionSort(array, setBarsArray, StopSort) {
 
       setBarsArray([...bars]);
 
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, Speed));
 
       bars[minIndex].isSwapping = false;
       bars[i].isSwapping = false;

@@ -29,26 +29,28 @@ h1 {
   height: 15%;
   background-color: #fb8c00;
 }
-
-.navbar button {
-  cursor: pointer;
-  height: 3em;
-  width: auto;
-  min-width: 5em;
-  padding: 5px 10px;
-  border-radius: 25px;
-  outline: none;
-  border: 2px solid #f5ad56;
-  font-size: 1.2rem;
-}
-
 .navbar .btns {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: auto;
+  height: 100%;
   max-width: 60%;
 }
+.navbar button {
+  font-size: 1.1em;
+  outline: none;
+  color: #fff;
+  height: 50px;
+  width: auto;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #e64a19;
+  border: none;
+  cursor: pointer;
+  box-shadow: 10px 10px 20px #fe5420;
+}
+
 .visualizer {
   display: flex;
   flex-direction: column;
@@ -132,7 +134,32 @@ h1 {
   animation: move 3s infinite;
 }
 .visualizer .controller {
-  height: 10%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.visualizer .controller .Speed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.visualizer .controller p {
+  height: auto;
+  width: auto;
+}
+.Length {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.visualizer .controller input[type="range"] {
+  height: auto;
+  width: 300px;
 }
 .visualizer .box-bars {
   height: 30%;
@@ -143,12 +170,14 @@ h1 {
   transition: background-color 0.3s ease-in-out;
 }
 .visualizer .box-bars p {
-  font-size: 20px;
+  font-size: 15px;
   padding-top: 10px;
+  writing-mode: vertical-rl;
+  text-align: center;
 }
 .bar {
   transition: height 0.3s ease-in-out;
-  width: 40px;
+  width: 30px;
   text-align: center;
   margin: 0 2px;
   background-color: #ff7043;
@@ -188,9 +217,9 @@ h1 {
     box-shadow: #27272c;
   }
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 140px) {
   .bar {
-    width: 12px;
+    width: 18px;
   }
   .navbar button {
     font-size: 0.8rem;
@@ -213,7 +242,7 @@ h1 {
   }
 
   .navbar button {
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding: 5px;
     margin: 5px 0;
     min-width: 100%;
@@ -226,7 +255,6 @@ h1 {
 
   .visualizer {
     height: 75%;
-    padding: 20px;
   }
 
   .visualizer .box-bars {
@@ -235,12 +263,12 @@ h1 {
   }
 
   .visualizer .box-bars p {
-    padding-top: 0px;
+    padding-top: 5px;
+    font-size: 10px;
   }
   .bar {
-    width: 20px;
+    width: 18px;
     margin: 1px;
-    font-size: 3px;
   }
 
   .visualizer button {
@@ -248,9 +276,21 @@ h1 {
     font-size: 0.8rem;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
   .bar {
-    width: 10px;
+    width: 9px;
     font-size: 1.5px;
+  }
+  .visualizer .box-bars p {
+    font-size: 8px;
+  }
+  .visualizer .controller {
+    flex-direction: column;
+  }
+  .visualizer .controller .Speed {
+    margin-bottom: 10px;
+  }
+  .visualizer .controller input[type="range"] {
+    width: 190px;
   }
 }

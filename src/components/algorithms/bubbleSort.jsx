@@ -1,6 +1,6 @@
 import swapBars from "../utils/swap";
 
-const bubbleSort = async (array, updateStateCallback, StopSort) => {
+const bubbleSort = async (array, updateStateCallback, StopSort, Speed) => {
   const newArray = [...array];
 
   for (let i = 0; i < newArray.length - 1; i++) {
@@ -16,7 +16,7 @@ const bubbleSort = async (array, updateStateCallback, StopSort) => {
         swapBars(newArray, j, j + 1);
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      await new Promise((resolve) => setTimeout(resolve, Speed));
 
       newArray[j].isSwapping = false;
       newArray[j + 1].isSwapping = false;
@@ -26,7 +26,7 @@ const bubbleSort = async (array, updateStateCallback, StopSort) => {
 
     newArray[newArray.length - i - 1].isSorted = true;
 
-    await new Promise((resolve) => setTimeout(resolve, 20));
+    await new Promise((resolve) => setTimeout(resolve, Speed));
 
     updateStateCallback([...newArray]);
   }

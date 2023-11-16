@@ -7,7 +7,6 @@ function App() {
 
   const handleSortingState = (sorting) => {
     setButtonSortDisable(sorting);
-    console.log(sorting);
   };
 
   const handleButtonClick = async (buttonName) => {
@@ -15,7 +14,7 @@ function App() {
 
     if (buttonName === "Generate a new array") {
       barsRef.current.generateBarsArray();
-    } else if (buttonName === "BubbleSort") {
+    } else if (buttonName === "Bubble") {
       barsRef.current.sortBarsBubble();
     } else if (buttonName === "Insertion") {
       barsRef.current.sortBarsInsertion();
@@ -46,19 +45,19 @@ function App() {
               handleButtonClick("Generate a new array");
             }}
           >
-            New Array
+            Generate New
           </button>
 
           <button
             disabled={ButtonSortDisable}
             style={{
               backgroundColor:
-                activeButton === "BubbleSort" ? "#FF7043" : "#E64A19",
+                activeButton === "Bubble" ? "#FF7043" : "#E64A19",
               color: "white",
               opacity: ButtonSortDisable === true ? "30%" : "100%",
               cursor: ButtonSortDisable === true ? "not-allowed" : "pointer",
             }}
-            onClick={() => handleButtonClick("BubbleSort")}
+            onClick={() => handleButtonClick("Bubble")}
           >
             BubbleSort
           </button>
