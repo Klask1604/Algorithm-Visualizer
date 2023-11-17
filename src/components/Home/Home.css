@@ -1,0 +1,37 @@
+.algorithmPicker {
+  display: flex;
+}
+.algorithmPicker img {
+  height: 195px;
+}
+
+.card-main {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+.card-container {
+  width: 345px;
+  height: 450px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 15px black;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.card-header {
+  height: 45%;
+}
+.content {
+  height: 55%;
+}
+.content h2 {
+  height: auto;
+}
+.card-container:hover {
+  box-shadow: 5px 5px 15px #fe5420;
+  cursor: pointer;
+}

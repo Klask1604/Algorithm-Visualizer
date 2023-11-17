@@ -1,13 +1,16 @@
 import { useState, useRef } from "react";
-import Bars from "./components/Bars";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sorting from "./components/Sorting";
 import Navbar from "./components/Navbar";
+import Home from "./components/Home/Home";
+import Pathfinder from "./components/pathfinder/Pathfinder";
 function App() {
   const barsRef = useRef();
   const [activeButton, setActiveButton] = useState(null);
-  const [ButtonSortDisable, setButtonSortDisable] = useState(false);
-
+  const [ButtontDisable, setButtonDisable] = useState(false);
+  const [Display, setDisplay] = useState();
   const handleSortingState = (sorting) => {
-    setButtonSortDisable(sorting);
+    setButtonDisable(sorting);
   };
 
   const handleButtonClick = async (buttonName) => {
@@ -28,12 +31,46 @@ function App() {
 
   return (
     <>
-      <Navbar
-        activeButton={activeButton}
-        ButtonSortDisable={ButtonSortDisable}
-        handleButtonClick={handleButtonClick}
-      />
-      <Bars ref={barsRef} onSortingStateChange={handleSortingState} />
+      <BrowserRouter basename="/Algorithm-Visualizer">
+        {/* <Navbar
+          activeButton={activeButton}
+          ButtonSortDisable={ButtonSortDisable}
+          handleButtonClick={handleButtonClick}
+        /> */}
+        <Home />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route
+            path="/sorting"
+            element={
+              <>
+                <Navbar
+                  activeButton={activeButton}
+                  ButtontDisable={ButtontDisable}
+                  handleButtonClick={handleButtonClick}
+                />
+                <Sorting
+                  ref={barsRef}
+                  onSortingStateChange={handleSortingState}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/pathfinder"
+            element={
+              <>
+                <Navbar
+                  activeButton={activeButton}
+                  ButtontDisable={ButtontDisable}
+                  handleButtonClick={handleButtonClick}
+                />
+                <Pathfinder />
+              </>
+            }
+          ></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

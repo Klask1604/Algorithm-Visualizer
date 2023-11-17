@@ -5,13 +5,13 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import bubbleSort from "./algorithms/bubbleSort";
 import insertionSort from "./algorithms/insertionSort";
 import radixSort from "./algorithms/radixSort";
 import selectionSort from "./algorithms/selectionSort";
 
-const Bars = forwardRef(({ onSortingStateChange }, ref) => {
+const Sorting = forwardRef(({ onSortingStateChange }, ref) => {
   const [barsArray, setBarsArray] = useState([]);
   const [isSorting, setIsSorting] = useState(false);
   const [Speed, setSpeed] = useState(110);
@@ -131,9 +131,11 @@ const Bars = forwardRef(({ onSortingStateChange }, ref) => {
     }
   };
   const lengthText = getLength(length);
+
   return (
     <>
       <div className="visualizer">
+        <div className="back-btn"></div>
         <div className="controller">
           <div className="Speed">
             <p style={{ marginBottom: "10px" }}>Adjust speed</p>
@@ -160,7 +162,6 @@ const Bars = forwardRef(({ onSortingStateChange }, ref) => {
             ></input>
           </div>
         </div>
-
         <div className="box-bars">
           {barsArray &&
             barsArray.map((bar, index) => (
@@ -186,4 +187,4 @@ const Bars = forwardRef(({ onSortingStateChange }, ref) => {
   );
 });
 
-export default Bars;
+export default Sorting;
