@@ -26,7 +26,7 @@ const Home = () => {
               </div>
             </div>
             <div className="option">
-              <div className="option">
+              <div className="option-card">
                 <div
                   className="option-card"
                   onClick={() => navigate("/pathfinder")}

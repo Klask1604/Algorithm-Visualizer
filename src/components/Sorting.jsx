@@ -5,7 +5,6 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import bubbleSort from "./algorithms/bubbleSort";
 import insertionSort from "./algorithms/insertionSort";
 import radixSort from "./algorithms/radixSort";
@@ -69,6 +68,7 @@ const Sorting = forwardRef(({ onSortingStateChange }, ref) => {
     await radixSort(barsArray, setBarsArray, stopSortingRef, Speed);
     setIsSorting(false);
   };
+
   useImperativeHandle(ref, () => ({
     generateBarsArray,
     sortBarsBubble: async () => {
@@ -134,7 +134,7 @@ const Sorting = forwardRef(({ onSortingStateChange }, ref) => {
 
   return (
     <>
-      <div className="visualizer">
+      <div className="sorting-visualizer">
         <div className="back-btn"></div>
         <div className="controller">
           <div className="Speed">

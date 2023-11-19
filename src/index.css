@@ -10,6 +10,7 @@
   font-family: "Josefin Sans", sans-serif;
 }
 
+/* navbar */
 .title {
   height: auto;
   width: 20%;
@@ -31,7 +32,7 @@ h1 {
 }
 .navbar .btns {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   height: 100%;
   max-width: 80%;
@@ -47,11 +48,14 @@ h1 {
   text-transform: uppercase;
   background-color: #e64a19;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
   box-shadow: 10px 10px 20px #fe5420;
 }
+/* end navbar */
 
-.visualizer {
+/* sorting.jsx */
+.sorting-visualizer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,23 +63,23 @@ h1 {
   height: 85%;
   background-color: #f8c88d;
 }
-.visualizer .stopbtn {
+.sorting-visualizer .stopbtn {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   height: 10%;
 }
-.visualizer .back-btn {
+.sorting-visualizer .back-btn {
   display: flex;
   justify-content: end;
   margin: 20px;
   height: 8%;
 }
-.visualizer .back-btn button {
+.sorting-visualizer .back-btn button {
   margin: 10px;
 }
-.visualizer button {
+.sorting-visualizer button {
   width: auto;
   height: auto;
   position: relative;
@@ -88,28 +92,28 @@ h1 {
   padding: 1rem 3rem;
   transition: 0.2s;
 }
-.visualizer button:hover {
+.sorting-visualizer button:hover {
   letter-spacing: 0.2rem;
   padding: 1.1rem 3.1rem;
   background: #ff7043;
   color: #ffffff;
   animation: box 3s infinite;
 }
-.visualizer button::before {
+.sorting-visualizer button::before {
   content: "";
   position: absolute;
   inset: 2px;
   background: #272822;
 }
-.visualizer button span {
+.sorting-visualizer button span {
   position: relative;
   z-index: 1;
 }
-.visualizer button i {
+.sorting-visualizer button i {
   position: absolute;
   inset: 0;
 }
-.visualizer button i::before {
+.sorting-visualizer button i::before {
   content: "";
   position: absolute;
   width: 10px;
@@ -120,12 +124,12 @@ h1 {
   background: #272822;
   transition: 0.2s;
 }
-.visualizer button:hover i::before {
+.sorting-visualizer button:hover i::before {
   width: 15px;
   left: 20%;
   animation: move 3s infinite;
 }
-.visualizer button i::after {
+.sorting-visualizer button i::after {
   content: "";
   position: absolute;
   width: 10px;
@@ -137,25 +141,25 @@ h1 {
   transition: 0.2s;
 }
 
-.visualizer button:hover i::after {
+.sorting-visualizer button:hover i::after {
   width: 15px;
   left: 80%;
   animation: move 3s infinite;
 }
-.visualizer .controller {
+.sorting-visualizer .controller {
   height: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.visualizer .controller .Speed {
+.sorting-visualizer .controller .Speed {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: auto;
 }
-.visualizer .controller p {
+.sorting-visualizer .controller p {
   height: auto;
   width: auto;
 }
@@ -166,11 +170,11 @@ h1 {
   align-items: center;
   height: auto;
 }
-.visualizer .controller input[type="range"] {
+.sorting-visualizer .controller input[type="range"] {
   height: auto;
   width: 300px;
 }
-.visualizer .box-bars {
+.sorting-visualizer .box-bars {
   height: 20%;
   min-height: 250px;
   display: flex;
@@ -178,7 +182,7 @@ h1 {
   justify-content: center;
   transition: background-color 0.3s ease-in-out;
 }
-.visualizer .box-bars p {
+.sorting-visualizer .box-bars p {
   font-size: 15px;
   padding-top: 10px;
   writing-mode: vertical-rl;
@@ -226,6 +230,8 @@ h1 {
     box-shadow: #27272c;
   }
 }
+/* end sorting.jsx */
+
 /* Home.jsx */
 .main-card {
   height: 100%;
@@ -247,21 +253,21 @@ h1 {
 }
 .options-card {
   max-width: 100%;
-  height: 75%;
+  max-height: 75%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .option {
   max-width: 50%;
-  height: 100%;
+  max-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .option-card {
   background: #f7f7f8;
-  height: 500px;
+  max-height: 500px;
   max-width: 400px;
   box-shadow: 10px 10px 15px black;
   border-radius: 20px;
@@ -271,12 +277,12 @@ h1 {
   box-shadow: 10px 10px 15px #fe5420;
 }
 .option-img {
-  height: 250px;
-  width: 400px;
+  max-height: 250px;
+  max-width: 400px;
 }
 .option-img img {
-  height: 250px;
-  width: 400px;
+  max-height: 250px;
+  max-width: 400px;
 }
 .option-text {
   height: auto;
@@ -287,13 +293,55 @@ h1 {
 .option-text h1 {
   font-size: 2.5vw;
 }
+/* end Home.jsx */
 
-@media screen and (max-width: 140px) {
+/* pathfinder.jsx */
+
+.pathfinder-visualizer {
+  width: auto;
+  height: 85;
+  background-color: #f8c88d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pathfinder-visualizer .grid {
+  display: flex;
+  width: 80%;
+  height: 80%;
+}
+
+.node {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+}
+.rowWrapper {
+  display: flex;
+  width: auto;
+  height: auto;
+}
+
+.node-start {
+  background-color: #b2ff59;
+}
+.node-End {
+  background-color: red;
+}
+/* end pathfinder.jsx */
+
+/* mediea queries */
+@media screen and (max-width: 1400px) {
   .bar {
     width: 18px;
   }
   .navbar button {
     font-size: 0.8rem;
+  }
+  .navbar .title {
+    font-size: 0.8vw;
+    width: 19%;
   }
 }
 
@@ -325,16 +373,16 @@ h1 {
     max-width: 100%;
   }
 
-  .visualizer {
+  .sorting-visualizer {
     height: 75%;
   }
 
-  .visualizer .box-bars {
+  .sorting-visualizer .box-bars {
     flex-wrap: wrap;
     justify-content: center;
   }
 
-  .visualizer .box-bars p {
+  .sorting-visualizer .box-bars p {
     padding-top: 5px;
     font-size: 10px;
   }
@@ -343,7 +391,7 @@ h1 {
     margin: 1px;
   }
 
-  .visualizer button {
+  .sorting-visualizer button {
     padding: 0.5rem 1.5rem;
     font-size: 0.8rem;
   }
@@ -353,16 +401,17 @@ h1 {
     width: 9px;
     font-size: 1.5px;
   }
-  .visualizer .box-bars p {
+  .sorting-visualizer .box-bars p {
     font-size: 8px;
   }
-  .visualizer .controller {
+  .sorting-visualizer .controller {
     flex-direction: column;
   }
-  .visualizer .controller .Speed {
+  .sorting-visualizer .controller .Speed {
     margin-bottom: 10px;
   }
-  .visualizer .controller input[type="range"] {
+  .sorting-visualizer .controller input[type="range"] {
     width: 190px;
   }
 }
+/* end media queries */

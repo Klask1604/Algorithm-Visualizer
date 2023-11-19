@@ -15,21 +15,31 @@ function Navbar({ activeButton, ButtontDisable, handleButtonClick }) {
         </h1>
       </div>
       <div className="btns">
-        <button onClick={() => navigate("/")}>Home</button>
-        {ButtonMap.map((number, index) => (
+        <button
+          disabled={ButtontDisable}
+          style={{
+            color: "white",
+            opacity: ButtontDisable ? "30%" : "100%",
+            cursor: ButtontDisable ? "not-allowed" : "pointer",
+          }}
+          onClick={() => navigate("/")}
+        >
+          Home
+        </button>
+        {ButtonMap.map((button_name, index) => (
           <button
             key={index}
             disabled={ButtontDisable}
             style={{
               backgroundColor:
-                activeButton === `Button${number}` ? "#FF7043" : "#E64A19",
+                activeButton === `Button${button_name}` ? "#FF7043" : "#E64A19",
               color: "white",
               opacity: ButtontDisable ? "30%" : "100%",
               cursor: ButtontDisable ? "not-allowed" : "pointer",
             }}
-            onClick={() => handleButtonClick(`Button${number}`)}
+            onClick={() => handleButtonClick(`${button_name}`)}
           >
-            {number}
+            {button_name}
           </button>
         ))}
       </div>
