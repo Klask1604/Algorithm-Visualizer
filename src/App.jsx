@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sorting from "./components/Sorting";
+import Sorting from "./components/sorting/Sorting";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home/Home";
 import Pathfinder from "./components/pathfinder/Pathfinder";

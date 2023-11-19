@@ -5,10 +5,10 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
-import bubbleSort from "./algorithms/bubbleSort";
-import insertionSort from "./algorithms/insertionSort";
-import radixSort from "./algorithms/radixSort";
-import selectionSort from "./algorithms/selectionSort";
+import bubbleSort from "../algorithms/bubbleSort";
+import insertionSort from "../algorithms/insertionSort";
+import radixSort from "../algorithms/radixSort";
+import selectionSort from "../algorithms/selectionSort";
 
 const Sorting = forwardRef(({ onSortingStateChange }, ref) => {
   const [barsArray, setBarsArray] = useState([]);

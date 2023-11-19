@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Node from "./Node";
+
 const Pathfinder = () => {
   const col = 40;
   const row = 15;
