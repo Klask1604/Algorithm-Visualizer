@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Playpen+Sans&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +17,7 @@
 }
 
 h1 {
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 4.5em;
   height: auto;
 }
@@ -299,7 +299,7 @@ h1 {
 
 .pathfinder-visualizer {
   width: auto;
-  height: 85;
+  height: 85%;
   background-color: #f8c88d;
   display: flex;
   align-items: center;
@@ -308,13 +308,14 @@ h1 {
 
 .pathfinder-visualizer .grid {
   display: flex;
-  width: 80%;
-  height: 80%;
+  justify-content: center;
+  width: auto;
+  height: auto;
 }
 
 .node {
-  width: 40px;
-  height: 40px;
+  width: 2vw;
+  height: 2vw;
   border: 1px solid black;
 }
 .rowWrapper {
@@ -328,6 +329,73 @@ h1 {
 }
 .node-End {
   background-color: red;
+}
+.isWall {
+  background-color: black;
+}
+.node-visited {
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 10%;
+  }
+
+  50% {
+    background-color: peachpuff;
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: peachpuff;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: peachpuff;
+  }
+}
+
+.node-wall {
+  background-color: rgb(12, 53, 71);
+}
+
+.node-shortest-path {
+  animation-name: shortestPath;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes shortestPath {
+  0% {
+    transform: scale(0.6);
+    background-color: aquamarine;
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: aquamarine;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: aquamarine;
+  }
 }
 /* end pathfinder.jsx */
 
@@ -412,6 +480,10 @@ h1 {
   }
   .sorting-visualizer .controller input[type="range"] {
     width: 190px;
+  }
+  .node {
+    width: 3vw;
+    height: 4vw;
   }
 }
 /* end media queries */
