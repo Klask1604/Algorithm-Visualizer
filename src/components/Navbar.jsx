@@ -2,11 +2,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Navbar({ activeButton, ButtontDisable, handleButtonClick }) {
   const location = useLocation();
   const navigate = useNavigate();
+
   const ButtonMap = location.pathname.includes("/sorting")
     ? ["Generate a new array", "Bubble", "Insertion", "Selection", "Radix"]
     : location.pathname.includes("/pathfinder")
-    ? ["Generate a new map", "A*", "Djiksatra's", "Maximum Flow"]
+    ? ["Generate a new map", "A*", "Dijkstra's", "Deep First Search"]
     : [];
+
   return (
     <div className="navbar">
       <div className="title">

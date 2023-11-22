@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
-
+import sorting from "./sorting.jpg";
+import pathfind from "./pathfinder.png";
 const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -9,36 +10,27 @@ const Home = () => {
   return (
     <>
       {!isBarsRoute && (
-        <div className="main-card">
-          <div className="title-card">
+        <div className="main-container">
+          <div className="title">
             <h1>ALGORITHM VISUALIZER</h1>
           </div>
-          <div className="options-card">
-            <div className="option">
-              <div className="option-card" onClick={() => navigate("/sorting")}>
-                <div className="option-img">
-                  <img src="src\assets\sorting.jpg"></img>
-                </div>
-                <div className="option-text">
-                  <h1>Sorting Algorithms</h1>
-                  <p>Bubble , Selection , Insertion , Radix</p>
-                </div>
+          <div className="chooseAlgorithm">
+            <div className="algorithm" onClick={() => navigate("/sorting")}>
+              <div className="image">
+                <img src={sorting}></img>
+              </div>
+              <div className="description">
+                <h1>Sorting</h1>
+                <p>BubbleSort SelectionSort InsertionSort RadixSort</p>
               </div>
             </div>
-            <div className="option">
-              <div className="option-card">
-                <div
-                  className="option-card"
-                  onClick={() => navigate("/pathfinder")}
-                >
-                  <div className="option-img">
-                    <img src="src\assets\pathfinder.png"></img>
-                  </div>
-                  <div className="option-text">
-                    <h1>Pathfinder Algorithms</h1>
-                    <p>A* , Dijkstra's , Maximum Flow</p>
-                  </div>
-                </div>
+            <div className="algorithm" onClick={() => navigate("/pathfinder")}>
+              <div className="image">
+                <img src={pathfind}></img>
+              </div>
+              <div className="description">
+                <h1>Pathfind</h1>
+                <p>A* Dijkstra DeepFirstSearch</p>
               </div>
             </div>
           </div>

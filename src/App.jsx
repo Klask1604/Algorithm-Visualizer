@@ -1,14 +1,17 @@
 import { useState, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Sorting from "./components/sorting/Sorting";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home/Home";
 import Pathfinder from "./components/pathfinder/Pathfinder";
+
 function App() {
-  const barsRef = useRef();
+  const sortingRef = useRef();
+  const pathRef = useRef();
   const [activeButton, setActiveButton] = useState(null);
   const [ButtontDisable, setButtonDisable] = useState(false);
-  const [Display, setDisplay] = useState();
+
   const handleSortingState = (sorting) => {
     setButtonDisable(sorting);
   };
@@ -17,15 +20,23 @@ function App() {
     setActiveButton(buttonName);
 
     if (buttonName === "Generate a new array") {
-      barsRef.current.generateBarsArray();
+      sortingRef.current.generateBarsArray();
     } else if (buttonName === "Bubble") {
-      barsRef.current.sortBarsBubble();
+      sortingRef.current.sortBarsBubble();
     } else if (buttonName === "Insertion") {
-      barsRef.current.sortBarsInsertion();
+      sortingRef.current.sortBarsInsertion();
     } else if (buttonName === "Selection") {
-      barsRef.current.sortBarsSelection();
+      sortingRef.current.sortBarsSelection();
     } else if (buttonName === "Radix") {
-      await barsRef.current.sortBarsRadix();
+      await sortingRef.current.sortBarsRadix();
+    } else if (buttonName === "Generate a new map") {
+      pathRef.current.initializeGrid();
+    } else if (buttonName === "A*") {
+      pathRef.current.visualizePath("Astar");
+    } else if (buttonName === "Dijkstra's") {
+      pathRef.current.visualizePath("Dijkstra");
+    } else if (buttonName === "Deep First Search") {
+      pathRef.current.visualizePath("DFS");
     }
   };
 
@@ -50,7 +61,7 @@ function App() {
                   handleButtonClick={handleButtonClick}
                 />
                 <Sorting
-                  ref={barsRef}
+                  ref={sortingRef}
                   onSortingStateChange={handleSortingState}
                 />
               </>
@@ -65,7 +76,7 @@ function App() {
                   ButtontDisable={ButtontDisable}
                   handleButtonClick={handleButtonClick}
                 />
-                <Pathfinder />
+                <Pathfinder ref={pathRef} />
               </>
             }
           ></Route>

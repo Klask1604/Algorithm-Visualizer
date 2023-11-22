@@ -1,12 +1,19 @@
-const Node = ({ isStart, isEnd, row, col, isWall }) => {
-  const classes = isStart
+const Node = ({ row, col, isStart, isEnd, isWall, onNodeClick }) => {
+  const extraClassName = isStart
     ? "node-start"
-    : isWall
-    ? "isWall"
     : isEnd
-    ? "node-End"
+    ? "node-end"
+    : isWall
+    ? "node-wall"
     : "";
-  return <div className={`node ${classes}`} id={`node-${row}-${col}`}></div>;
+
+  return (
+    <div
+      id={`node-${row}-${col}`}
+      className={`node ${extraClassName}`}
+      onClick={() => onNodeClick(row, col)}
+    />
+  );
 };
 
 export default Node;

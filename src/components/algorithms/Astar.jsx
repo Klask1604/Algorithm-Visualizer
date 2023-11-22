@@ -4,24 +4,21 @@ function Astar(startNode, endNode) {
   let path = [];
   let visitedNodes = [];
 
-  startNode.g = 0;
-  startNode.h = heuristic(startNode, endNode);
-  startNode.f = startNode.h;
-
   openSet.push(startNode);
 
   while (openSet.length > 0) {
-    let leastIndex = 0;
+    let lowestIndex = 0;
     for (let i = 0; i < openSet.length; i++) {
-      if (openSet[i].f < openSet[leastIndex].f) {
-        leastIndex = i;
+      if (openSet[i].f < openSet[lowestIndex].f) {
+        lowestIndex = i;
       }
     }
-    let current = openSet[leastIndex];
-    visitedNodes.push(current);
 
-    if (current === endNode) {
-      let temp = current;
+    let currentNode = openSet[lowestIndex];
+    visitedNodes.push(currentNode);
+
+    if (currentNode === endNode) {
+      let temp = currentNode;
       path.push(temp);
       while (temp.previous) {
         path.push(temp.previous);
@@ -31,37 +28,38 @@ function Astar(startNode, endNode) {
       return { path, visitedNodes };
     }
 
-    openSet.splice(leastIndex, 1);
-    closedSet.push(current);
+    openSet = openSet.filter((node) => node !== currentNode);
+    closedSet.push(currentNode);
 
-    let neighbours = current.neighbours;
+    let neighbours = currentNode.neighbours;
     for (let i = 0; i < neighbours.length; i++) {
       let neighbour = neighbours[i];
 
-      if (closedSet.includes(neighbour) || neighbour.isWall) {
-        continue;
-      }
+      if (!closedSet.includes(neighbour) && !neighbour.isWall) {
+        let tempG = currentNode.g + 1;
 
-      let tempG = current.g + 1;
+        let newPath = false;
+        if (openSet.includes(neighbour)) {
+          if (tempG < neighbour.g) {
+            neighbour.g = tempG;
+            newPath = true;
+          }
+        } else {
+          neighbour.g = tempG;
+          newPath = true;
+          openSet.push(neighbour);
+        }
 
-      let newPath = false;
-      if (!openSet.includes(neighbour)) {
-        newPath = true;
-        neighbour.h = heuristic(neighbour, endNode);
-        openSet.push(neighbour);
-      } else if (tempG < neighbour.g) {
-        newPath = true;
-      }
-
-      if (newPath) {
-        neighbour.g = tempG;
-        neighbour.f = neighbour.g + neighbour.h;
-        neighbour.previous = current;
+        if (newPath) {
+          neighbour.h = heuristic(neighbour, endNode);
+          neighbour.f = neighbour.g + neighbour.h;
+          neighbour.previous = currentNode;
+        }
       }
     }
   }
 
-  return { path, visitedNodes, error: "No path found" };
+  return { path, visitedNodes }; // No path found
 }
 
 function heuristic(a, b) {
