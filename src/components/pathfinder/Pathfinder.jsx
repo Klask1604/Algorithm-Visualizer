@@ -5,9 +5,8 @@ import Dijkstra from "../algorithms/Dijkstra";
 import DeepFirstSearch from "../algorithms/DeepFirstSearch";
 const Pathfinder = forwardRef((prosp, ref) => {
   const col = 30;
-  const row = 25;
+  const row = 30;
 
-  // Initialize the start and end nodes
   const NODE_START_ROW = 0;
   const NODE_START_COL = 0;
   const NODE_END_ROW = row - 1;
@@ -31,7 +30,7 @@ const Pathfinder = forwardRef((prosp, ref) => {
           rowIndex === NODE_START_ROW && colIndex === NODE_START_COL;
 
         const isEnd = rowIndex === NODE_END_ROW && colIndex === NODE_END_COL;
-        const isWall = Math.random() < 0.2; // Randomly assign walls
+        const isWall = Math.random() < 0.2;
         return new Spot(rowIndex, colIndex, isStart, isEnd, isWall);
       })
     );

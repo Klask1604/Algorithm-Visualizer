@@ -304,8 +304,8 @@ h1 {
 }
 
 .node {
-  width: 2vw;
-  height: 2vw;
+  width: 20px;
+  height: 20px;
   border: 1px solid black;
 }
 .rowWrapper {
@@ -477,7 +477,8 @@ h1 {
     height: 4vw;
   }
   .main-container .title {
-    font-size: 70%;
+    font-size: 9px;
+    word-wrap: break-word;
   }
   .main-container .chooseAlgorithm {
     flex-direction: column;
@@ -494,7 +495,11 @@ h1 {
     height: 60%;
   }
   .description h1 {
-    font-size: 2em;
+    font-size: 20px;
+  }
+  .description p {
+    font-size: 20px;
+    word-break: keep-all;
   }
 }
 /* end media queries */
